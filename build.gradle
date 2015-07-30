@@ -1,7 +1,7 @@
 buildscript {
 
     repositories {
-        mavenCentral()
+        jcenter()
     }
 
     dependencies {
@@ -9,6 +9,7 @@ buildscript {
     }
 
 }
+
 
 allprojects {
     version = VERSION_NAME
@@ -18,3 +19,4 @@ allprojects {
         mavenCentral()
     }
 }
+

@@ -14,7 +14,7 @@ Try out the sample application [on the Play Store](https://play.google.com/store
   1. Include the library as local library project or add the dependency in your build.gradle.
         
         dependencies {
-            compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+            compile 'com.astuetz:pagerslidingtabstrip:1.0.2'
         }
 
   2. Include the PagerSlidingTabStrip widget in your layout. This should usually be placed
@@ -63,7 +63,7 @@ your brand:
 
 # Changelog
 
-### Current Version: 1.0.1
+### Current Version: 1.0.2
 
 ### [1.0.1](https://github.com/astuetz/PagerSlidingTabStrip/tree/v1.0.1)
 

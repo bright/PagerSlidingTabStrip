@@ -1,4 +1,9 @@
+plugins {
+    id "com.jfrog.bintray" version "1.2"
+}
+
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 
 dependencies {
     compile 'com.android.support:support-v4:22.2.0'
@@ -22,4 +27,52 @@ android {
     }
 }
 
+
 //apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
+
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "source"
+}
+
+bintray {
+    user = 'bright'
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['bintray']
+    pkg {
+        repo = 'maven'
+        desc = project.POM_NAME
+        name = project.POM_ARTIFACT_ID
+        userOrg = 'bright'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/bright/PagerSlidingTabStrip'
+        version {
+            name = version
+            desc = "${project.POM_NAME} ${version}"
+            vcsTag = "v${version}"
+        }
+    }
+}
+
+publishing {
+    publications {
+        bintray(MavenPublication) {
+            artifact(sourceJar)
+            artifact("$buildDir/outputs/aar/library-release.aar")
+            artifactId project.POM_ARTIFACT_ID
+            groupId group
+            version version
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+
+                //Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
+                configurations.compile.allDependencies.each {
+                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('groupId', it.group)
+                    dependencyNode.appendNode('artifactId', it.name)
+                    dependencyNode.appendNode('version', it.version)
+                }
+            }
+        }
+    }
+}
