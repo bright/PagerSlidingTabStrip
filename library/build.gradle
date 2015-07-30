@@ -47,9 +47,9 @@ bintray {
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/bright/PagerSlidingTabStrip'
         version {
-            name = version
-            desc = "${project.POM_NAME} ${version}"
-            vcsTag = "v${version}"
+            name = project.VERSION_NAME
+            desc = "${project.POM_NAME} ${project.VERSION_NAME}"
+            vcsTag = "v${project.VERSION_NAME}"
         }
     }
 }
@@ -60,8 +60,8 @@ publishing {
             artifact(sourceJar)
             artifact("$buildDir/outputs/aar/library-release.aar")
             artifactId project.POM_ARTIFACT_ID
-            groupId group
-            version version
+            groupId project.GROUP
+            version project.VERSION_NAME
             pom.withXml {
                 def dependenciesNode = asNode().appendNode('dependencies')
 
