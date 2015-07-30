@@ -42,7 +42,7 @@ bintray {
     pkg {
         repo = 'maven'
         desc = project.POM_NAME
-        name = project.POM_ARTIFACT_ID
+        name = "${project.GROUP}:${project.POM_ARTIFACT_ID}"
         userOrg = 'bright'
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/bright/PagerSlidingTabStrip'
